@@ -1,7 +1,18 @@
 import axios from 'axios'
+import store from '@/store'
+import router from '@/router'
 import { MessageBox, Message } from 'element-ui'
-// import store from '@/store'
-// import { getToken } from '@/utils/auth'
+import { getTimeStamp } from '@/utils/auth'
+const TimeOut = 3600 // 定义超时时间
+
+// 是否超时
+// 超时逻辑  (当前时间  - 缓存中的时间) 是否大于 时间差
+function IsCheckTimeOut() {
+  var currentTime = Date.now() // 当前时间戳
+  var timeStamp = getTimeStamp() // 缓存时间戳
+  return (currentTime - timeStamp) / 1000 > TimeOut
+}
+
 
 const service = axios.create({
   // 如果执行 npm run dev  值为 /api 正确  /api 这个代理只是给开发环境配置的代理
@@ -10,25 +21,23 @@ const service = axios.create({
   timeout: 5000 // 定义5秒超时
 }) // 创建一个axios的实例
 
-// // request interceptor
-// service.interceptors.request.use(
-//   config => {
-//     // do something before request is sent
-
-//     if (store.getters.token) {
-//       // let each request carry token
-//       // ['X-Token'] is a custom headers key
-//       // please modify it according to the actual situation
-//       config.headers['X-Token'] = getToken()
-//     }
-//     return config
-//   },
-//   error => {
-//     // do something with request error
-//     console.log(error) // for debug
-//     return Promise.reject(error)
-//   }
-// )
+// request interceptor
+service.interceptors.request.use(config => {
+  if (store.getters.token) {
+    // 只有在有token的情况下 才有必要去检查时间戳是否超时
+    if (IsCheckTimeOut()) {       // 如果它为true表示 过期了
+      store.dispatch('user/logout') //  token没用了 因为超时了登出操作
+      // 跳转到登录页
+      router.push('/login')
+      return Promise.reject(new Error('token超时了'))
+    }
+    // 如果token存在 注入token
+    config.headers['Authorization'] = `Bearer ${store.getters.token}`  //用obj.xxx行不行？
+  }
+  return config // 必须返回配置
+}, error => {
+  return Promise.reject(error)
+}) 
 
 // 响应拦截器
 service.interceptors.response.use(response => {
@@ -42,8 +51,14 @@ service.interceptors.response.use(response => {
     return Promise.reject(new Error(message))
   }
 }, error => {
-  Message.error(error.message) // 提示错误信息
-  return Promise.reject(error) // 返回执行错误 让当前的执行链跳出成功 直接进入 catch
+  if (error.response && error.response.data && error.response.data.code === 10002) {
+    // 当等于10002的时候 表示 后端告诉我token超时了
+    store.dispatch('user/logout') // 登出action 删除token
+    router.push('/login')
+  } else {
+    Message.error(error.message) // 提示错误信息,这是其他非token过期的错误信息
+  }
+   return Promise.reject(error)
 })
 
 export default service
