@@ -13,7 +13,7 @@ import store from './store'
 import router from './router'
 
 import '@/icons' // icon
-// import '@/permission' // permission control
+import '@/permission' // permission control
 
 /**
  * If you don't want to use mock-server
@@ -42,3 +42,8 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+//  console.log(Array.prototype.forEach(item => {
+//    console.log(item)
+//  }))
+// console.log(Object.prototype)
