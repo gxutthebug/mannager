@@ -9,7 +9,7 @@
                 <el-col>{{ treeNode.manager }}</el-col>
                 <el-col>
                   <!-- 放置下拉菜单 -->
-                  <el-dropdown>
+                  <el-dropdown @command="operateDepts">
                     <!-- 内容 -->
                     <span>操作
                       <i class="el-icon-arrow-down" />
@@ -17,10 +17,10 @@
                     <!-- 具名插槽 -->
                     <el-dropdown-menu slot="dropdown">
                       <!-- 下拉选项 -->
-                      <el-dropdown-item>添加子部门</el-dropdown-item>
+                      <el-dropdown-item command="add">添加子部门</el-dropdown-item>
                        <!-- 编辑部门和删除部门只会在子节点上显示 -->
-                   <el-dropdown-item v-if="!isRoot">编辑部门</el-dropdown-item>
-                    <el-dropdown-item v-if="!isRoot">删除部门</el-dropdown-item>
+                    <el-dropdown-item v-if="!isRoot" command="edit">编辑部门</el-dropdown-item>
+                    <el-dropdown-item v-if="!isRoot" command="del">删除部门</el-dropdown-item>
 
                     </el-dropdown-menu>
                   </el-dropdown>
@@ -46,7 +46,22 @@ export default {
       type: Boolean,
       default: false
     }
-  }
+  },
+  methods: {
+    // 操作节点调用的方法
+    operateDepts(type) {
+      if (type === 'add') {
+        // 添加子部门的操作
+        console.log(1)
+      } else if (type === 'edit') {
+        //  编辑部门的操作
+        console.log(2)
+      } else {
+        //  删除操作
+        console.log(3)
+      }
+    }
+  },
 }
 </script>
 

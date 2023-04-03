@@ -17,7 +17,9 @@
 </template>
 
 <script>
-import TreeTools from './components/tree-tools';
+import TreeTools from './components/tree-tools'
+import { getDepartments } from '@/api/departments'
+import  { tranListToTreeData } from "@/utils/index"
 
 export default {
   data() {
@@ -29,6 +31,21 @@ export default {
         label: 'name' // 表示 从这个属性显示内容
       },
       company: { name: '江苏传智播客教育科技股份有限公司', manager: '负责人' }
+    }
+  },
+  created() {
+    this.getDepartments() // 调用自身的方法
+  },
+  methods: {
+    async getDepartments() {
+     try {
+      const result = await getDepartments()
+      this.company = { name: result.companyName, manager: '负责人' } // 这里定义一个空串  因为 它是根 所有的子节点的数据pid 都是 ""
+      this.departs = tranListToTreeData(result.depts, '')
+      console.log(result)
+     } catch (err) {
+       console.log(err)
+     }
     }
   },
   components :{

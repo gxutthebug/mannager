@@ -1,6 +1,7 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+    <el-form ref="loginForm" :model="loginForm"   @submit.native="test"
+    :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
         <h3 class="title">登录页面</h3>
@@ -41,9 +42,9 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native="handleLogin">
         登录
-      </el-button>
+      </el-button>     
 
       <div class="tips">
         <span style="margin-right:20px;">手机号: xxxx</span>
@@ -103,6 +104,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.password.focus()
       })
+    },
+    test () {
+       console.log("触发了表单提交")
     },
     handleLogin() {
       this.$refs.loginForm.validate(async isOK => {
