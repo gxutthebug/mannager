@@ -34,6 +34,7 @@
 
 
 <script>
+import { delDepartments }  from "@/api/departments"
 export default {
     // props可以用数组来接收数据 也可以用对象来接收
   // props: {   props属性: {  配置选项 }  }
@@ -49,7 +50,7 @@ export default {
   },
   methods: {
     // 操作节点调用的方法
-    operateDepts(type) {
+   async operateDepts(type) {
       if (type === 'add') {
         // 添加子部门的操作
         console.log(1)
@@ -58,7 +59,17 @@ export default {
         console.log(2)
       } else {
         //  删除操作
-        console.log(3)
+        try {
+          await this.$confirm('确定要删除该部门吗')
+          console.log(this.treeNode.id)
+          await delDepartments(this.treeNode.id)
+          //  如果删除成功了  就会进入这里
+          this.$emit('delDepts') // 触发自定义事件
+          // console.log(data)
+          this.$message.success('删除部门成功')
+        } catch (err) {
+          console.log(err)
+        }
       }
     }
   },

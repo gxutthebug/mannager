@@ -47,10 +47,14 @@ service.interceptors.response.use(response => {
     return data
   } else {
     // 业务已经错误了 还能进then ? 不能 ！ 应该进catch
+    console.log("这里出错了1")
+    console.log(message)
     Message.error(message) // 提示错误消息
     return Promise.reject(new Error(message))
   }
 }, error => {
+  console.log("是这里错了2")
+  console.log(error)
   if (error.response && error.response.data && error.response.data.code === 10002) {
     // 当等于10002的时候 表示 后端告诉我token超时了
     store.dispatch('user/logout') // 登出action 删除token

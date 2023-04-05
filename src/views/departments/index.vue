@@ -8,7 +8,7 @@
           <!-- 传入内容 插槽内容 会循环多次 有多少节点 就循环多少次 -->
           <!-- 作用域插槽 slot-scope="obj" 接收传递给插槽的数据   data 每个节点的数据对象-->
              <template v-slot:default=" { data }">
-              <tree-tools  :treeNode="data" />
+              <tree-tools  :treeNode="data"  @delDepts="getDepartments"/>
              </template> 
      </el-tree>
       </el-card>
