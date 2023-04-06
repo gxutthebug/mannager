@@ -52,8 +52,8 @@ export default {
     // 操作节点调用的方法
    async operateDepts(type) {
       if (type === 'add') {
-        // 添加子部门的操作
-        console.log(1)
+        // 告诉父组件 显示弹层
+        this.$emit('addDepts', this.treeNode) // 为何传出treeNode 因为是添加子部门 需要当前部门的数据
       } else if (type === 'edit') {
         //  编辑部门的操作
         console.log(2)
