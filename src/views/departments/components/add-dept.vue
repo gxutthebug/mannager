@@ -124,8 +124,6 @@ export default {
     // 获取员工简单列表数据
     async  getEmployeeSimple() {
       this.peoples = await getEmployeeSimple()
-      debugger
-      console.log(this.peoples)
     },
      // 点击确定时触发
      // 点击确定时触发
@@ -164,8 +162,8 @@ export default {
       // const {name, code, manager, introduce} = await getDepartDetail(id)
       // this.formData = {name, code, manager, introduce}
       this.formData = await getDepartDetail(id)
-      console.log("---")
-      console.log(this.formData)
+      // console.log("---")
+      // console.log(this.formData)
      }
   }
 }
