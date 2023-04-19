@@ -66,6 +66,9 @@ new Vue({
   render: h => h(App)
 })
 
+console.log(Vue.prototype)
+console.log(Vue.options)
+
 //  console.log(Array.prototype.forEach(item => {
 //    console.log(item)
 //  }))
