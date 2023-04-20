@@ -15,7 +15,8 @@ export default {
     async onSuccess({ header, results }) {
       console.log(results)
       if (this.type === 'user') {
-        //  header是 头部表头的集合
+      //  header是 头部表头的集合
+      // [姓名, 工号.....]
       // results是实际的数据
       // [{ username: '高小山', workNumber: 1002 }]
       // [{ 姓名: '高小山’，工号： 1002 }]

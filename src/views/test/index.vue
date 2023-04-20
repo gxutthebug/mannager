@@ -4,49 +4,55 @@
         <div class="box">
        <div class="rowA1">
         <div class="left">
-          基本情况
+            <span>基</span>
+            <span>本</span>
+            <span>情</span>
+            <span>况</span>
         </div>
         <div class="right1">
           <div class="rowB1">
             <div style="flex-basis: 13%;">姓名</div>
-            <div style="flex-basis: 13%; background-color: beige;">
+            <div style="flex-basis: 13%;">
               <el-form-item>
                  <input type="text" >
              </el-form-item>
            </div>
             <div style="flex-basis: 9%; ">性别</div>
-            <div style="flex-basis: 9%; background-color: beige;">
+            <div style="flex-basis: 9%;">
               <el-form-item>
                  <input type="text" >
              </el-form-item>
             </div>
             <div style="flex-basis: 9%; ">民族</div>
-            <div style="flex-basis: 9%; background-color: beige;">
+            <div style="flex-basis: 9%;">
               <el-form-item>
                  <input type="text" >
              </el-form-item></div>
             <div style="flex-basis: 10%; ">生日</div>
-            <div style="flex-basis: 10%; background-color: beige;">
+            <div style="flex-basis: 10%;">
               <el-form-item>
                  <input type="text" >
              </el-form-item>
             </div>
             <div style="flex-basis: 9%; ">籍贯</div>
-            <div style="flex-basis: 9%; background-color: beige;">
+            <div style="flex-basis: 9%;">
               <el-form-item>
                  <input type="text" >
              </el-form-item>
             </div>
           </div>
-          <div class="rowB2" style="background-color: bisque;"> 
-            <div style="flex-basis: 13%; white-space: pre-wrap;">单位 丶 业务或职业</div>
-            <div style="flex-basis: 40%; background-color: beige;">
+          <div class="rowB2" > 
+            <div style="flex-basis: 13%; white-space: pre-wrap;" class="split">
+              <span>单位丶职务</span>
+              <span>或职业</span>
+            </div>
+            <div style="flex-basis: 40%;">
               <el-form-item>
                  <input type="text" >
              </el-form-item>
             </div>
             <div style="flex-basis: 17%;">身份证号码</div>
-            <div style="flex-basis: 30%; background-color: beige;">
+            <div style="flex-basis: 30%; ">
               <el-form-item>
                  <input type="text" >
              </el-form-item>
@@ -75,9 +81,11 @@
         </div>
        </div>
        <div class="rowA2">
-        <div class="left"></div>
+        <div class="left">
+            <span>申</span><span>请</span><span>入</span><span>党</span>
+        </div>
         <div class="right2">
-          <div class="rowC1" style="background-color: beige;">
+          <div class="rowC1">
             <div class="left2"></div>
           </div>
           <div class="rowC2">
@@ -86,7 +94,9 @@
         </div>
        </div>
        <div class="rowA3">
-        <div class="left"></div>
+        <div class="left">
+          <span>入</span><span>党</span><span>积</span><span>极</span><span>分</span><span>子</span><span>的</span><span>确</span><span>定</span><span>和</span><span>培</span><span>养</span><span>教</span><span>育</span>
+        </div>
         <div class="right3">
           <div class="rowD1">
              <div class="left2"></div>
@@ -106,7 +116,9 @@
         </div>
        </div>
        <div class="rowA4">
-        <div class="left"></div>
+        <div class="left">
+          <span>发</span><span>展</span><span>对</span><span>象</span><span>的</span><span>确</span><span>定</span><span>与</span><span>考</span><span>察</span>
+        </div>
         <div class="right4"></div>
        </div>
    </div>
@@ -142,14 +154,23 @@
   }
   div {
     outline: 1px solid #000;
+    // border: 1px solid #000;
+    // outline-offset: -1px;
     // box-shadow: 0 0 0 1px #000;
+    // box-shadow: inset 0 0 0 1px #b4b1b1;
+    // margin : 0px -1px -1px 0px;  // 上、右、下、左，逆时针
+  }
+  .split {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
   }
    .box {
       margin: auto ;
       margin-top: 200px;
       height: 1400px;
       width: 1500px;
-      background-color: #2c2e30;
       display: flex;
       flex-direction: column;
 
@@ -157,14 +178,16 @@
          display: flex;
          .left{
           flex-basis: 4%;
-          // width: 60px;
-          background-color: #444648;
+          // width: 60px;;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
          }
 
          .right1 {
               // flex-grow: 1;
               flex-basis: 96%;
-              background-color: #929292;
               display: flex;
              flex-direction: column;
 
@@ -180,7 +203,6 @@
          }
          .right2 {
               flex-basis: 96%;
-              background-color:#F5F5F5;
               display: flex;
               flex-direction: column;
               div[class^="rowC"] {
@@ -188,13 +210,11 @@
                 display: flex;
                 .left2{
                       flex-basis: 25%;
-                      background-color: #00A896;
                    }
               }
          }
          .right3 {
               flex-basis: 96%;
-              background-color: #e0e0e0;
               display: flex;
               flex-direction: column;
 
@@ -202,59 +222,46 @@
                    display: flex;
                    .left2{
                       flex-basis: 25%;
-                      background-color: #09554c;
                    }
               }
              .rowD1 {
                   flex-basis: 25%;
-                  background-color: #ffffa1;
              }
 
              .rowD2 {
                   flex-basis: 12.5%;
-                  background-color: #ff983f;
              }
 
              .rowD3 {
                   flex-basis: 25%;
-                  background-color: #FF6600;
              }
              
              .rowD4 {
                   flex-basis: 25%;
-                  background-color: #ffffa1;
              }
 
              .rowD5 {
                   flex-basis: 12.5%;
-                  background-color: #ff983f;
              }
                
          }
          .right4 {
               flex-grow: 1;
-              background-color: #929292;
          }
    }
 
       .rowA1{ 
         flex-basis: 22%;
-        background-color: #ff983f;
       }
 
       .rowA2{ 
         flex-basis: 15%;
-        background-color:#FF6600;
       }
       .rowA3{
         flex-basis: 45%;
-        background-color:#ffffa1;
       }
       .rowA4{
         flex-basis: 18%;
-        background-color:#929292;
       }
    }
-
-   
 </style>
